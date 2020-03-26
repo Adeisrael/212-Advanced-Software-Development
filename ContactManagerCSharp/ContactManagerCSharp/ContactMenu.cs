@@ -16,5 +16,18 @@ namespace ContactManagerCSharp
         {
             InitializeComponent();
         }
+
+        private void btn_personal_Click(object sender, EventArgs e)
+        {
+            PersonalEditor personal = new PersonalEditor();
+            personal.Show(); //show personal editor form when button is clicked 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BusinessEditor business = new BusinessEditor();
+            business.Show(); //show business editor form when button is clicked
+
+        }
     }
 }

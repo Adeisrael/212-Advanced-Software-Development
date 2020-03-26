@@ -33,7 +33,7 @@ namespace ContactManagerCSharp
                             ContactEmail = reader.GetString(3),
                             HomeTel = reader.GetString(4),
                             ContactAddr1 = reader.GetString(5),
-                            ContactAddr2 =reader.GetString(6),
+                            ContactAddr2 = reader.GetString(6),
                             ContactCity = reader.GetString(7),
                             ContactPostcode = reader.GetString(8)
                         });
@@ -58,7 +58,7 @@ namespace ContactManagerCSharp
                     row["ContactFname"] = item.ContactFname;
                     row["ContactLname"] = item.ContactLname;
                     row["ContactEmail"] = item.ContactEmail;
-                    row["HomeTel"] = item.ContactEmail;
+                    row["HomeTel"] = item.HomeTel;
                     row["ContactAddr1"] = item.ContactAddr1;
                     row["ContactAddr2"] = item.ContactAddr2;
                     row["ContactCity"] = item.ContactCity;
@@ -156,9 +156,11 @@ namespace ContactManagerCSharp
                             ContactPostcode = reader.GetString(8)
                         });
                     }
+                //Creates and Adds column headers for the DataTable and Adds list to the DataTable
                 businessContactDt.Columns.Add("ContactID");
                 businessContactDt.Columns.Add("ContactFname");
                 businessContactDt.Columns.Add("ContactLname");
+                businessContactDt.Columns.Add("ContactEmail");
                 businessContactDt.Columns.Add("BusinessTel");
                 businessContactDt.Columns.Add("ContactAddr1");
                 businessContactDt.Columns.Add("ContactAddr2");
@@ -168,7 +170,7 @@ namespace ContactManagerCSharp
                 foreach (var item in businessContacts)
                 {
                     var row = businessContactDt.NewRow();
-
+                    //adds items from business contacts to the Datatable
                     row["ContactID"] = item.ContactID;
                     row["ContactFname"] = item.ContactFname;
                     row["ContactLname"] = item.ContactLname;
