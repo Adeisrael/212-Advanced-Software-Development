@@ -70,11 +70,13 @@ namespace ContactManagerCSharp
                 return personalContactDt;
             }
         }
-        public void InsertPersonal(PersonalContact personalContact)//insert personal contact 
+
+        //INSERT PERSONAL CONTACTS
+        public async void InsertPersonal(PersonalContact personalContact) 
         {
             using(var conn = new MySqlConnection(connString))
             {
-                conn.Open();//open database connection
+                await conn.OpenAsync();//open database connection
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
@@ -87,16 +89,16 @@ namespace ContactManagerCSharp
                     cmd.Parameters.AddWithValue("p6", personalContact.ContactAddr2);
                     cmd.Parameters.AddWithValue("p7", personalContact.ContactCity);
                     cmd.Parameters.AddWithValue("p8", personalContact.ContactPostcode);
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }
 
-        public void UpdatePersonal(PersonalContact personalContact)//update Personal Contact
+        public async void UpdatePersonal(PersonalContact personalContact)//update Personal Contact
         {
             using (var conn = new MySqlConnection(connString))
             {
-                conn.Open();
+                await conn.OpenAsync();
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
@@ -110,22 +112,23 @@ namespace ContactManagerCSharp
                     cmd.Parameters.AddWithValue("p7", personalContact.ContactAddr2);
                     cmd.Parameters.AddWithValue("p8", personalContact.ContactCity);
                     cmd.Parameters.AddWithValue("p9", personalContact.ContactPostcode);
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }
 
-        public void DeletePersonal(int id)//Delete PersonalContact
+        //DELETE PERSONAL
+        public async void DeletePersonal(int id)
         {
             using (var conn = new MySqlConnection(connString))
             {
-                conn.Open();
+                await conn.OpenAsync();
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = "CALL deletePersonal(@p1);";//Call parameter 1 (contact id) and delete
                     cmd.Parameters.AddWithValue("p1", id);
-                    cmd.ExecuteNonQuery();//run query
+                    await cmd.ExecuteNonQueryAsync();//run query
                 }
             }
 
@@ -187,11 +190,11 @@ namespace ContactManagerCSharp
             }
         }
 
-        public void InsertBusiness(BusinessContact businessContact)//INSERT BUSINESS CONTACT
+        public async void InsertBusiness(BusinessContact businessContact)//INSERT BUSINESS CONTACT
         {
             using (var conn = new MySqlConnection(connString))//accessing private class with connString
             {
-                conn.Open();
+                await conn.OpenAsync();
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
@@ -204,16 +207,16 @@ namespace ContactManagerCSharp
                     cmd.Parameters.AddWithValue("p6", businessContact.ContactAddr2);
                     cmd.Parameters.AddWithValue("p7", businessContact.ContactCity);
                     cmd.Parameters.AddWithValue("p8", businessContact.ContactPostcode);
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }
 
-        public void UpdateBusinessContact(BusinessContact businessContact)//UPDATE BUSINESS CONTACT
+        public async void UpdateBusinessContact(BusinessContact businessContact)//UPDATE BUSINESS CONTACT
         {
             using (var conn = new MySqlConnection(connString))//accessing private class with connString
             {
-                conn.Open();
+                await conn.OpenAsync();
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
@@ -227,21 +230,21 @@ namespace ContactManagerCSharp
                     cmd.Parameters.AddWithValue("p7", businessContact.ContactAddr2);
                     cmd.Parameters.AddWithValue("p8", businessContact.ContactCity);
                     cmd.Parameters.AddWithValue("p9", businessContact.ContactPostcode);
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }
-        public void DeleteBusiness(int id)//DELETE BUSINES CONTACT
+        public async void DeleteBusiness(int id)//DELETE BUSINES CONTACT
         {
             using (var conn = new MySqlConnection(connString))//accessing private class with connString
             {
-                conn.Open();
+                await conn.OpenAsync();
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = "CALL deleteBusiness(@p1);";//delete business contacts in database with the ID
                     cmd.Parameters.AddWithValue("p1",id); // parameter 1 containing ContactID                
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
 
             }

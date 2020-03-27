@@ -28,6 +28,21 @@ namespace ContactManagerCSharp
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            //Accessiblity of textboxes when refresh button is clicked
+            tbFname.Enabled = false;
+            tbLname.Enabled = false;
+            tbEmail.Enabled = false;
+            tbBusTel.Enabled = false;
+            tbAddress1.Enabled = false;
+            tbAddress2.Enabled = false;
+            tbCity.Enabled = false;
+            tbPostcode.Enabled = false;
+
+            //Button functions when AddNew button is clicked
+            btnUpdate.Enabled = true;//disable update button
+            btnDelete.Enabled = true;//disable delete button
+            btnSaveNew.Enabled = false;//enable savenew button
+            btnSave.Enabled = false;//disable save selected button 
             dGVBusinessRecords.DataSource = dbConn.GetAllBusiness();
         }
 

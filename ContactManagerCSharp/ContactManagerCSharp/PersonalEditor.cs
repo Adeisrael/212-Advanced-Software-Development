@@ -56,6 +56,22 @@ namespace ContactManagerCSharp
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            //Accessiblity of textboxes when refresh ic clicked
+            tbFname.Enabled = false;
+            tbLname.Enabled = false;
+            tbEmail.Enabled = false;
+            tbHomeTel.Enabled = false;
+            tbAddress1.Enabled = false;
+            tbAddress2.Enabled = false;
+            tbCity.Enabled = false;
+            tbPostcode.Enabled = false;
+
+            //other button functions when Refresh button is clicked
+            btnUpdate.Enabled = true;// disable Update button when refresh is clicked
+            btnSave.Enabled = false;//disable Save Selected button when refresh is clicked
+            btnDelete.Enabled = true;// disable Delete button when refresh is clicked
+            btnSaveNew.Enabled = false;//enable SaveNew button when refresh is clicked
+            btnAddNew.Enabled = true;//enable Addnew button when refresh is clicked
             dGVPersonalDetails.DataSource = dbConn.GetAllPersonal();
         }
 
@@ -118,7 +134,9 @@ namespace ContactManagerCSharp
             personalContact.ContactAddr2 = tbAddress2.Text;
             personalContact.ContactCity = tbCity.Text;
             personalContact.ContactPostcode = tbPostcode.Text;
+            
             dbConn.InsertPersonal(personalContact);//inserts new personalcontact records into the database 
+            dGVPersonalDetails.DataSource = dbConn.GetAllPersonal();//gets all personalrecords and shows on the datagridview
 
             //Accesiblity of Textboxes when SaveNew button is clicked
             tbFname.Enabled = false;
@@ -133,12 +151,13 @@ namespace ContactManagerCSharp
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
             btnSaveNew.Enabled = false;
-            dGVPersonalDetails.DataSource = dbConn.GetAllPersonal();//gets all personalrecords and shows on the datagridview
+
+            
         }
 
         /////UPDATE PERSONAL RECORDS
         private void btnUpdate_Click(object sender, EventArgs e)
-        {
+        {//Accessiblity of textboxes when Update button is clicked
             tbFname.Enabled = true;
             tbLname.Enabled = true;
             tbEmail.Enabled = true;
@@ -147,9 +166,9 @@ namespace ContactManagerCSharp
             tbAddress2.Enabled = true;
             tbCity.Enabled = true;
             tbPostcode.Enabled = true;
-
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
+            //Accessibility of Buttons when update button is clicked
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
             btnAddNew.Enabled = false;
             btnSave.Enabled = true;          
         }
