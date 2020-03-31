@@ -1,0 +1,41 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.cj.jdbc.CallableStatement;
+
+public class dbConn {
+	//database connection credentials
+	String connString = "db212it.chmhkq40bexm.us-east-1.rds.amazonaws.com/HarrisContactDB";
+	String username = "admin";
+	String password = "migrate123";
+	Connection con = null;
+	
+	public dbConn () {
+		//exception handling with try and catch 
+		try {
+			con=DriverManager.getConnection(connString,username,password);
+			System.out.println("Connected");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Not Connected");
+		}
+	}
+	
+	public ResultSet GetAllPersonal() 
+	{	
+		ResultSet rs= null;
+		String sql="{call selectAllPersonal()}";
+		try {
+			java.sql.CallableStatement cst= con.prepareCall(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+
+}
