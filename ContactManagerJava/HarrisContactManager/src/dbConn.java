@@ -24,7 +24,7 @@ public class dbConn {
 			System.out.println("Not Connected");
 		}
 	}
-	
+	//READ PERSONAL CONTACTS
 	public ResultSet GetAllPersonal() 
 	{	
 		ResultSet rs= null;
@@ -39,6 +39,7 @@ public class dbConn {
 		return rs;
 	}
 	
+	//READ BUSINESS CONTACTS
 	public ResultSet GetAllBusiness() 
 	{
 		ResultSet rs= null;
@@ -53,5 +54,53 @@ public class dbConn {
 		return rs;
 	}
 	
-
+	//UPDATEPERSONAL
+	public void UpdatePersonal(String fname, String lname, String email, String hometel, String addr1, String addr2, String city, String postcode, String id ) 
+	{
+		
+		ResultSet rs=null;
+		String sql="{call updatePersonal(?,?,?,?,?,?,?,?,?)}";
+		try {
+			java.sql.CallableStatement cst=con.prepareCall(sql);
+			
+			cst.setString(1, id );
+			cst.setString(2, fname);
+			cst.setString(3, lname);
+			cst.setString(4, email);
+			cst.setString(5, hometel);
+			cst.setString(6, addr1);
+			cst.setString(7, addr2);
+			cst.setString(8, city);
+			cst.setString(9, postcode);
+			
+			rs=cst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	public void UpdateBusiness (String fname, String lname, String email, String bustel,String addr1, String addr2, String city, String postcode, String id) {
+		
+		ResultSet rs=null;
+		String sql="{call updateBusiness(?,?,?,?,?,?,?,?,?)}";
+		try {
+			java.sql.CallableStatement cst=con.prepareCall(sql);
+			
+			cst.setString(1, id );
+			cst.setString(2, fname);
+			cst.setString(3, lname);
+			cst.setString(4, email);
+			cst.setString(5, bustel);
+			cst.setString(6, addr1);
+			cst.setString(7, addr2);
+			cst.setString(8, city);
+			cst.setString(9, postcode);
+			
+			rs=cst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 }
