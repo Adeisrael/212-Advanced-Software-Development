@@ -11,11 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PersonalCon extends JFrame {
 
@@ -81,12 +84,15 @@ public class PersonalCon extends JFrame {
 		
 		textFname = new JTextField();
 		textFname.setColumns(10);
+		textFname.setEnabled(false);//disable textbox 
 		
 		textHomTel = new JTextField();
 		textHomTel.setColumns(10);
+		textHomTel.setEnabled(false);//disable textbox 
 		
 		textCity = new JTextField();
 		textCity.setColumns(10);
+		textCity.setEnabled(false);//disable textbox 
 		
 		JLabel lblNewLabel = new JLabel("First Name");
 		
@@ -96,18 +102,23 @@ public class PersonalCon extends JFrame {
 		
 		textLname = new JTextField();
 		textLname.setColumns(10);
+		textLname.setEnabled(false);//disable textbox 
 		
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
+		textEmail.setEnabled(false);//disable textbox 
 		
 		textAddr1 = new JTextField();
 		textAddr1.setColumns(10);
+		textAddr1.setEnabled(false);//disable textbox 
 		
 		textAddr2 = new JTextField();
 		textAddr2.setColumns(10);
+		textAddr2.setEnabled(false);//disable textbox 
 		
 		textPostCode = new JTextField();
 		textPostCode.setColumns(10);
+		textPostCode.setEnabled(false);//disable textbox 
 		
 		JLabel lblNewLabel_3 = new JLabel("Home Tel");
 		
@@ -130,6 +141,29 @@ public class PersonalCon extends JFrame {
 				btnSaveNew.setEnabled(false);
 				btnSave.setEnabled(false);
 				table.setModel(DbUtils.resultSetToTableModel(d.GetAllPersonal()));
+				
+				//Clear textboxes after Save New is clicked
+				textFname.setText("");
+				textLname.setText("");
+				textEmail.setText("");
+				textHomTel.setText("");
+				textAddr1.setText("");
+				textAddr2.setText("");
+				textCity.setText("");
+				textPostCode.setText("");
+				
+				//Disable text boxes
+				textFname.setEnabled(false);
+				textLname.setEnabled(false);
+				textEmail.setEnabled(false);
+				textHomTel.setEnabled(false);
+				textAddr1.setEnabled(false);
+				textAddr2.setEnabled(false);
+				textCity.setEnabled(false);
+				textPostCode.setEnabled(false);
+				
+				
+				
 			}
 		});
 		
@@ -142,6 +176,16 @@ public class PersonalCon extends JFrame {
 				btnDelete.setEnabled(false);
 				btnSaveNew.setEnabled(false);
 				btnSave.setEnabled(true);
+				
+				//ENABLE TEXTBOXES
+				textFname.setEnabled(true);
+				textLname.setEnabled(true);
+				textEmail.setEnabled(true);
+				textHomTel.setEnabled(true);
+				textAddr1.setEnabled(true);
+				textAddr2.setEnabled(true);
+				textCity.setEnabled(true);
+				textPostCode.setEnabled(true);
 			}
 		});
 		
@@ -169,25 +213,77 @@ public class PersonalCon extends JFrame {
 		btnSave.setEnabled(false);//disable save selected button
 		
 		btnDelete = new JButton("Delete Seleceted");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String id=table.getValueAt(table.getSelectedRow(), 0).toString();
+				d.DeletePersonal(id);
+				table.setModel(DbUtils.resultSetToTableModel(d.GetAllPersonal()));
+			}
+		});
 		
 		btnAddNew = new JButton("Add New");
 		btnAddNew.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {//accessibility of buttons when Add new is clicked
 				btnUpdate.setEnabled(false);
 				btnDelete.setEnabled(false);
 				btnSaveNew.setEnabled(true);
 				btnSave.setEnabled(false);
+				
+				textFname.setEnabled(true);//enable text boxes
+				textLname.setEnabled(true);
+				textEmail.setEnabled(true);
+				textHomTel.setEnabled(true);
+				textAddr1.setEnabled(true);
+				textAddr2.setEnabled(true);
+				textCity.setEnabled(true);
+				textPostCode.setEnabled(true);
+								
 			}
 		});
 		
 		btnSaveNew = new JButton("Save New");
-		btnSaveNew.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnSaveNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(textFname.getText() == "") {//if else condition for data in empty textboxes
+					
+				//Add new records when add new button is clicked
+				String fname=textFname.getText();
+				String lname=textLname.getText();
+				String email=textEmail.getText();
+				String hometel=textHomTel.getText();
+				String addr1=textAddr1.getText();
+				String addr2=textAddr2.getText();
+				String city=textCity.getText();
+				String postcode=textPostCode.getText();
+				d.AddPersonal(fname, lname, email, hometel, addr1, addr2, city, postcode);
+				table.setModel(DbUtils.resultSetToTableModel(d.GetAllPersonal()));
+				}				
+				else JOptionPane.showMessageDialog(null, "Please Insert Records");//Error message for empty firstname textbox
+				
+				//Clear textboxes after Save New is clicked
+				textFname.setText("");
+				textLname.setText("");
+				textEmail.setText("");
+				textHomTel.setText("");
+				textAddr1.setText("");
+				textAddr2.setText("");
+				textCity.setText("");
+				textPostCode.setText("");													
 			}
 		});
 		btnSaveNew.setEnabled(false);//disable save new button
+		btnSaveNew.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+												
+			}
+		});
+		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

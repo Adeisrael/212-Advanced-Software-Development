@@ -80,6 +80,7 @@ public class dbConn {
 		}	
 	}
 	
+	//UPDATEBUSINESSS
 	public void UpdateBusiness (String fname, String lname, String email, String bustel,String addr1, String addr2, String city, String postcode, String id) {
 		
 		ResultSet rs=null;
@@ -103,4 +104,80 @@ public class dbConn {
 			e.printStackTrace();
 		}	
 	}
+	
+	//INSERT PERSONAL
+	public void AddPersonal(String fname, String lname, String email, String hometel,String addr1, String addr2, String city, String postcode ) {
+				
+		String sql="{call insertPersonal(?,?,?,?,?,?,?,?)}";
+	try {	
+		java.sql.CallableStatement cst= con.prepareCall(sql);
+		cst.setString(1, fname);
+		cst.setString(2, lname);
+		cst.setString(3, email);
+		cst.setString(4, hometel);
+		cst.setString(5, addr1);
+		cst.setString(6, addr2);
+		cst.setString(7, city);
+		cst.setString(8, postcode);
+		cst.executeQuery();
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}	
+		
+			
+	}
+	
+	//INSERT BUSINESS 
+	public void AddBusiness(String fname, String lname, String email, String bustel,String addr1, String addr2, String city, String postcode ) {
+		
+		String sql="{call insertBusiness(?,?,?,?,?,?,?,?)}";
+	try {
+		java.sql.CallableStatement cst= con.prepareCall(sql);
+		cst.setString(1, fname);
+		cst.setString(2, lname);
+		cst.setString(3, email);
+		cst.setString(4, bustel);
+		cst.setString(5, addr1);
+		cst.setString(6, addr2);
+		cst.setString(7, city);
+		cst.setString(8, postcode);
+		cst.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	
+	//DELETE PERSONAL
+	public void DeletePersonal(String id) {
+		
+		String sql="{call deletePersonal(?)}";
+		try {
+		java.sql.CallableStatement cst = con.prepareCall(sql);
+		cst .setString(1,id);
+		cst.executeQuery();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}	
+	}
+	
+	//DELETE BUSINESS
+	public void DeleteBusiness(String id) {
+		
+		String sql="{call deleteBusiness(?)}";
+	try {	
+		java.sql.CallableStatement cst=con.prepareCall(sql);
+		cst.setString(1, id);
+		cst.executeQuery();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+
 }
+
