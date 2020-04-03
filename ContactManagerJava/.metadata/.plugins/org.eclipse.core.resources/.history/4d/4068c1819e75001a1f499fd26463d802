@@ -248,7 +248,7 @@ public class PersonalCon extends JFrame {
 		btnSaveNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!(textFname.getText().isEmpty())) {//if else condition for data in empty textboxes
+				if(textFname.getText() == "") {//if else condition for data in empty textboxes
 					
 				//Add new records when add new button is clicked
 				String fname=textFname.getText();

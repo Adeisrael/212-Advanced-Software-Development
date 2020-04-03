@@ -76,7 +76,6 @@ public class BusinessCon extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		table = new JTable();
-		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {//display contents from rows in their respective textboxes 
@@ -257,7 +256,7 @@ public class BusinessCon extends JFrame {
 		btnSaveNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!(textFname.getText().isEmpty())) {//if else condition for data in empty textboxes
+				if(textFname.getText() == "") {//if else condition for data in empty textboxes
 				
 				//Add new records when add new button is clicked
 				String fname=textFname.getText();
