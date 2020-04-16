@@ -1,26 +1,27 @@
 //Personal Contact class inherits from Contact class
 public class PersonalContact extends Contact {
-
-	private String homeTel;
-
-	public PersonalContact(String id, String firstName, String lastName, String email, String houseNo, String street,
-			String city, String postCode, String personalTel) {
-		super(id, firstName, lastName, email, houseNo, street, city, postCode);
-		this.homeTel = personalTel;
+//Encapsulation of attribute
+	private String homeTel;//Personal Contact attribute
+//inherited attributes
+	public PersonalContact(String id, String firstName, String lastName, String email, String addr1, String addr2,
+			String city, String postCode, String homeTel) {
+		//attributes of super class
+		super(id, firstName, lastName, email, addr1, addr2, city, postCode);
+		this.homeTel = homeTel;
 	}
-
-	public String getPersonalTel() {
+//get method for HomeTel
+	public String getHomeTel() {
 		return homeTel;
 	}
-
-	public void setPersonalTel(String personalTel) {
-		this.homeTel = personalTel;
+//set method for HomeTel
+	public void setHomeTel(String homeTel) {
+		this.homeTel = homeTel;
 	}
 
-//here is the same
+//Polymorphism-overriding toString method inherited from the contact class to string 
 	@Override
 	public String toString() {
-		return "PersonalContact [personalTel=" + homeTel + "]";
+		return "PersonalContact [homeTel=" + homeTel + "]";
 	}
 
 }
