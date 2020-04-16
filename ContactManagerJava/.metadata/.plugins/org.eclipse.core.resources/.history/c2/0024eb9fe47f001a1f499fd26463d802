@@ -50,7 +50,7 @@ public class ContactManager {
 				pc.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(128, 155, 153, 23);
+		btnNewButton.setBounds(128, 155, 119, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Business Contacts");
@@ -62,7 +62,7 @@ public class ContactManager {
 				bc.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(323, 155, 153, 23);
+		btnNewButton_1.setBounds(323, 155, 119, 23);
 		frame.getContentPane().add(btnNewButton_1);
 	}
 }

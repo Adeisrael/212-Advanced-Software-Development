@@ -1,0 +1,26 @@
+
+public class BusinessContact extends Contact {
+
+	private String BusniessTel;
+
+	public BusinessContact(String id, String firstName, String lastName, String email, String houseNo, String street,
+			String city, String postCode, String busniessTel) {
+		super(id, firstName, lastName, email, houseNo, street, city, postCode);
+		BusniessTel = busniessTel;
+	}
+
+	public String getBusniessTel() {
+		return BusniessTel;
+	}
+
+	public void setBusniessTel(String busniessTel) {
+		BusniessTel = busniessTel;
+	}
+
+	// and here is te same.
+	@Override
+	public String toString() {
+		return "BusinessContact [BusniessTel=" + BusniessTel + "]";
+	}
+
+}

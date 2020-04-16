@@ -1,0 +1,26 @@
+
+public class PersonalContact extends Contact {
+
+	private String personalTel;
+
+	public PersonalContact(String id, String firstName, String lastName, String email, String houseNo, String street,
+			String city, String postCode, String personalTel) {
+		super(id, firstName, lastName, email, houseNo, street, city, postCode);
+		this.personalTel = personalTel;
+	}
+
+	public String getPersonalTel() {
+		return personalTel;
+	}
+
+	public void setPersonalTel(String personalTel) {
+		this.personalTel = personalTel;
+	}
+
+//here is the same
+	@Override
+	public String toString() {
+		return "PersonalContact [personalTel=" + personalTel + "]";
+	}
+
+}
